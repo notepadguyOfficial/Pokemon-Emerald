@@ -1,5 +1,7 @@
 # Pokémon Emerald
 
+[![Build](https://github.com/notepadguyOfficial/Pokemon-Emerald/actions/workflows/build.yml/badge.svg?event=push)](https://github.com/notepadguyOfficial/Pokemon-Emerald/actions/workflows/build.yml)
+
 This is a decompilation of Pokémon Emerald.
 
 It builds the following ROM:
@@ -9,3 +11,7 @@ It builds the following ROM:
 To set up the repository, see [INSTALL.md](INSTALL.md).
 
 For contacts and other pret projects, see [pret.github.io](https://pret.github.io/).
+
+## Credits
+
+[pret](https://github.com/pret) - Project Lead, programmer.

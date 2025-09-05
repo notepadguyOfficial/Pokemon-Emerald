@@ -2,8 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ main ]
   pull_request:
+    branches: [ main ]
 
 jobs:
   build:
@@ -16,11 +17,11 @@ jobs:
       COMPARE: 1
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@main
 
       - name: Checkout syms
         if: ${{ github.event_name == 'push' }}
-        uses: actions/checkout@master
+        uses: actions/checkout@main
         with:
           path: symbols
           ref: symbols
@@ -53,6 +54,22 @@ jobs:
           COMPARE: 0
         run: make -j${nproc} all
 
+      - name: Rename File pokeemerald.gba
+        run: mv pokeemerald.gba "Pokemon Emerald.gba"
+
+      - name: Rename File pokeemerald_moder.gba
+        run: mv pokeemerald_modern.gba "Pokemon Emerald (Modern).gba"
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4.6.2
+        with:
+          name: Latest-Build
+          path: |
+            Pokemon Emerald.gba
+            Pokemon Emerald (Modern).gba
+          retention-days: 90
+          if-no-files-found: error
+
       - name: Move symfiles
         if: ${{ github.event_name == 'push' }}
         run: |
@@ -67,3 +84,5 @@ jobs:
           cwd: "./symbols"
           add: "*.sym"
           message: ${{ env.SYMBOLS_COMMIT_MSG }}
+          push: true
+          github_token: ${{ secrets.PAT_PUSH }}
