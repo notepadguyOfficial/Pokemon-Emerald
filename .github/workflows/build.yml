@@ -45,8 +45,18 @@ jobs:
           ./install.sh ../
         working-directory: agbcc
 
-      - name: Compare
+      - name: Build (Vanilla, No Compare)
+        env:
+          MODERN: 0
+          COMPARE: 0
         run: make -j${nproc} all syms
+
+      - name: Create Hash File
+        run: sha1sum pokeemerald.gba > rom.sha1
+
+      - name: Compare
+        if: ${{ env.COMPARE == '1' }}
+        run: make compare
 
       - name: Modern
         env:

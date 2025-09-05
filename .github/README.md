@@ -1,6 +1,6 @@
 # Pokémon Emerald
 
-[![Build](https://github.com/notepadguyOfficial/Pokemon-Emerald/actions/workflows/build.yml/badge.svg?event=push)](https://github.com/notepadguyOfficial/Pokemon-Emerald/actions/workflows/build.yml)
+[![Build](https://github.com/notepadguyOfficial/Pokemon-Emerald/actions/workflows/build.yml/badge.svg?branch=qol-features&event=push)](https://github.com/notepadguyOfficial/Pokemon-Emerald/actions/workflows/build.yml)
 
 This is a decompilation of Pokémon Emerald.
 
