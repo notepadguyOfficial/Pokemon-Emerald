@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ master ]
   pull_request:
-    branches: [ main ]
+    branches: [ master ]
 
 jobs:
   build:
@@ -17,11 +17,11 @@ jobs:
       COMPARE: 1
     steps:
       - name: Checkout
-        uses: actions/checkout@main
+        uses: actions/checkout@master
 
       - name: Checkout syms
         if: ${{ github.event_name == 'push' }}
-        uses: actions/checkout@main
+        uses: actions/checkout@master
         with:
           path: symbols
           ref: symbols
