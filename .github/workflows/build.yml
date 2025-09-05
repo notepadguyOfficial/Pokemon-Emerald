@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [ master ]
+    branches: [ qol-features ]
   pull_request:
-    branches: [ master ]
+    branches: [ qol-features ]
 
 jobs:
   build:
