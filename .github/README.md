@@ -2,11 +2,10 @@
 
 **ToDo List:**
 - [x] No Trade Evolutions - Trade Evolutions now tied with Leveling as long as correct items are held by the Pokemon.
-- [ ] TMs - TMs are unlimited to use like HMs.
-- [ ] Evolution Stones - (Experimental) Evolution Stones are reusable instead of 1 use then item is destroyed.
-- [ ] Running Indoors – Allow the player to use the Running Shoes inside buildings.
+- [x] TMs - TMs are unlimited to use like HMs.
+- [x] Running Indoors – Allow the player to use the Running Shoes inside buildings.
 - [ ] EXP Share All – Make the EXP Share work like modern games, distributing EXP to all party Pokémon.
-- [ ] HMs - HM Moves can now be forgotten.
+- [ ] HMs oustide use - HM can now be used as a field item.
 
 <!--
 - [ ] Reusable Move Tutors – Allow move tutors to teach moves multiple times.
