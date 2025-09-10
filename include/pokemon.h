@@ -359,6 +359,17 @@ struct Evolution
     u16 targetSpecies;
 };
 
+struct LevelItemEvolution
+{
+    u16 item;
+    u16 level;
+};
+
+struct LevelEvolution
+{
+    u16 level;
+};
+
 #define NUM_UNOWN_FORMS 28
 
 #define GET_UNOWN_LETTER(personality) ((   \

@@ -1,17 +1,28 @@
-# Pokémon Emerald
+# Pokémon Emerald [![Build Status][ci-badge]][ci]
 
-[![Build](https://github.com/notepadguyOfficial/Pokemon-Emerald/actions/workflows/build.yml/badge.svg?event=push)](https://github.com/notepadguyOfficial/Pokemon-Emerald/actions/workflows/build.yml)
+**ToDo List:**
+- [x] No Trade Evolutions - Trade Evolutions now tied with Leveling as long as correct items are held by the Pokemon.
+- [ ] TMs - TMs are unlimited to use like HMs.
+- [ ] Evolution Stones - (Experimental) Evolution Stones are reusable instead of 1 use then item is destroyed.
+- [ ] Running Indoors – Allow the player to use the Running Shoes inside buildings.
+- [ ] EXP Share All – Make the EXP Share work like modern games, distributing EXP to all party Pokémon.
+- [ ] HMs - HM Moves can now be forgotten.
 
-This is a decompilation of Pokémon Emerald.
+<!--
+- [ ] Reusable Move Tutors – Allow move tutors to teach moves multiple times.
+- [ ] Faster Text Speed – Add an option for instant or faster text display.
+- [ ] IV/EV Checker – Add an NPC or menu option to check Pokémon IVs/EVs.
+- [ ] Nature/Mint System – Allow changing Pokémon natures via items or an NPC.
+- [ ] Infinite Bag Space – Remove or increase the bag item limit.
+- [ ] Repel QoL – Prompt to use another Repel when one runs out.
+- [ ] PokéMart Bulk Buy – Allow buying items in larger quantities.
+-->
 
-It builds the following ROM:
-
-* [**pokeemerald.gba**](https://datomatic.no-intro.org/index.php?page=show_record&s=23&n=1961) `sha1: f3ae088181bf583e55daf962a92bb46f4f1d07b7`
-
-To set up the repository, see [INSTALL.md](INSTALL.md).
-
-For contacts and other pret projects, see [pret.github.io](https://pret.github.io/).
+Evolution Table: [Evolutions](Evolution.md)
 
 ## Credits
 
 [pret](https://github.com/pret) - Project Lead, programmer.
+
+[ci]: https://github.com/notepadguyOfficial/Pokemon-Emerald/actions
+[ci-badge]: https://github.com/notepadguyOfficial/Pokemon-Emerald/actions/workflows/build.yml/badge.svg?branch=modern

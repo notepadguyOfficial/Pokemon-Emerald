@@ -185,25 +185,3 @@ const struct Evolution gEvolutionTable[NUM_SPECIES][EVOS_PER_MON] =
     [SPECIES_BELDUM]     = {{EVO_LEVEL, 20, SPECIES_METANG}},
     [SPECIES_METANG]     = {{EVO_LEVEL, 45, SPECIES_METAGROSS}},
 };
-
-const struct LevelItemEvolution gLevelItemEvolutionItems[NUM_SPECIES][EVOS_PER_MON] =
-{
-    [SPECIES_POLIWHIRL]  = {{ITEM_KINGS_ROCK, 45}},
-    [SPECIES_SLOWPOKE]   = {{ITEM_KINGS_ROCK, 36}},
-    [SPECIES_ONIX]       = {{ITEM_METAL_COAT, 45}},
-    [SPECIES_SEADRA]     = {{ITEM_DRAGON_SCALE, 45}},
-    [SPECIES_SCYTHER]    = {{ITEM_METAL_COAT, 45}},
-    [SPECIES_PORYGON]    = {{ITEM_UP_GRADE, 45}},
-    [SPECIES_CLAMPERL]   = {{ITEM_DEEP_SEA_TOOTH, 45},
-                            {ITEM_DEEP_SEA_SCALE, 45}},
-};
-
-const struct LevelEvolution gLevelEvolution[NUM_SPECIES][EVOS_PER_MON] =
-{
-    [SPECIES_KADABRA]    = {{35}},
-    [SPECIES_MACHOKE]    = {{35}},
-    [SPECIES_GRAVELER]   = {{35}},
-    [SPECIES_HAUNTER]    = {{35}},
-    [SPECIES_NIDORINA]   = {{35}},
-    [SPECIES_NIDORINO]   = {{35}},
-};
