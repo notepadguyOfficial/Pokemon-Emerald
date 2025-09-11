@@ -67,7 +67,7 @@ static void UseTMHMYesNo(u8);
 static void UseTMHM(u8);
 static void Task_StartUseRepel(u8);
 static void Task_UseRepel(u8);
-static void Cycle_Through_Repels(void);
+void Cycle_Through_Repels(void);
 static void Task_CloseCantUseKeyItemMessage(u8);
 static void SetDistanceOfClosestHiddenItem(u8, s16, s16);
 static void CB2_OpenPokeblockFromBag(void);
@@ -875,7 +875,7 @@ static void Task_UseRepel(u8 taskId)
     }
 }
 
-static void Cycle_Through_Repels(void)
+void Cycle_Through_Repels(void)
 {
     u16 RepelCycle[] = {ITEM_REPEL, ITEM_SUPER_REPEL, ITEM_MAX_REPEL};
     u8 i = 0;
