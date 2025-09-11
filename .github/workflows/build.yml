@@ -37,9 +37,6 @@ jobs:
           ./build.sh
           ./install.sh ../
         working-directory: agbcc
-
-      - name: Build Pokemon Emerald
-        run: make -j${nproc} all
       
       - name: Build Pokemon Emerald Modern
         env:

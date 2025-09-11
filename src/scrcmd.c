@@ -1729,7 +1729,8 @@ bool8 ScrCmd_checkpartymove(struct ScriptContext *ctx)
         }
     }
 
-    if (gSpecialVar_Result == PARTY_SIZE && (CheckBagHasItem(MoveToHM(move), 1)))
+    // if (gSpecialVar_Result == PARTY_SIZE && (CheckBagHasItem(MoveToHM(move), 1)))
+    if (CheckBagHasItem(MoveToHM(move), 1))
     {
         for (i = 0; i < PARTY_SIZE; i++)
         {
