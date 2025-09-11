@@ -3522,7 +3522,7 @@ static void Cmd_getexp(void)
                         viaSentIn++;
                 }
 
-                if (!gExpShareCheck && FlagGet(FLAG_EXP_SHARE) && totalMon>viaSentIn)
+                if (!gExpShareCheck && FlagGet(FLAG_EXP_ALL) && (totalMon > viaSentIn))
                 {
                     gExpShareCheck = TRUE;
                     gBattleStruct->expGetterMonId = 0;
