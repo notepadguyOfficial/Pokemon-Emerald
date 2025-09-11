@@ -1158,7 +1158,7 @@ void ItemUseOutOfBattle_CannotUse(u8 taskId)
 
 void ItemUseOutOfBattle_ExpShare(u8 taskId)
 {
-	if (FlagGet(FLAG_EXP_ALL))
+	if (!FlagGet(FLAG_EXP_ALL))
 	{
         FlagSet(FLAG_EXP_ALL);
 		PlaySE(SE_EXP_MAX);
