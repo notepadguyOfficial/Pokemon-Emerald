@@ -3,6 +3,7 @@
 #include "pokemon.h"
 #include "random.h"
 #include "roamer.h"
+#include "pokedex.h"
 
 // Despite having a variable to track it, the roamer is
 // hard-coded to only ever be in map group 0
@@ -232,6 +233,22 @@ void UpdateRoamerHPStatus(struct Pokemon *mon)
     ROAMER->status = GetMonData(mon, MON_DATA_STATUS);
 
     RoamerMoveToOtherLocationSet();
+}
+
+void NextRoamer(void)
+{
+    if ((ROAMER->species == SPECIES_LATIAS && GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_LATIOS), FLAG_GET_SEEN))
+        || (ROAMER->species == SPECIES_LATIOS && GetSetPokedexFlag(SpeciesToNationalPokedexNum(SPECIES_LATIAS), FLAG_GET_SEEN)))
+    {
+        SetRoamerInactive();
+    }
+    else
+    {
+        bool16 createLatios = ROAMER->species == SPECIES_LATIAS;
+        ClearRoamerData();
+        ClearRoamerLocationData();
+        CreateInitialRoamerMon(createLatios);
+    }
 }
 
 void SetRoamerInactive(void)
