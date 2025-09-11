@@ -5,7 +5,7 @@
 - [x] TMs - TMs are unlimited to use like HMs.
 - [x] Running Indoors – Allow the player to use the Running Shoes inside buildings.
 - [x] Repel QoL - Prompt to use another Repel when one runs out.
-- [ ] EXP Share All – Make the EXP Share work like modern games, distributing EXP to all party Pokémon.
+- [x] EXP Share All – Make the EXP Share work like modern games, distributing EXP to all party Pokémon.
 - [ ] HMs oustide use - HM can now be used as a field item.
 
 Evolution Table: [Evolutions](Evolution.md)
