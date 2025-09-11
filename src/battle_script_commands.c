@@ -3341,12 +3341,11 @@ static void Cmd_getexp(void)
                 gBattleScripting.getexpState = 5;
                 gBattleMoveDamage = 0; // used for exp
             }
-            else if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPECIES) == SPECIES_NONE
-                || GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_IS_EGG))
-+            {
-+                gBattleScripting.getexpState = 5;
-+                gBattleMoveDamage = 0; // used for exp
-+            }
+            else if (GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_SPECIES) == SPECIES_NONE || GetMonData(&gPlayerParty[gBattleStruct->expGetterMonId], MON_DATA_IS_EGG))
+            {
+                gBattleScripting.getexpState = 5;
+                gBattleMoveDamage = 0; // used for exp
+            }
             else
             {
                 // music change in wild battle after fainting a poke
@@ -3505,7 +3504,9 @@ static void Cmd_getexp(void)
         {
             gBattleStruct->expGetterMonId++;
             if (gBattleStruct->expGetterMonId < PARTY_SIZE)
+            {
                 gBattleScripting.getexpState = 2; // loop again
+            }
             else
             {
                 s32 totalMon = 0;
@@ -3530,7 +3531,9 @@ static void Cmd_getexp(void)
                     gBattleScripting.getexpState = 2; // loop again
                 }
                 else
+                {
                     gBattleScripting.getexpState = 6; // we're done
+                }
             }
         }
         break;
