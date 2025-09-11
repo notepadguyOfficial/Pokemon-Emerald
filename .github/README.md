@@ -8,7 +8,7 @@
 - [x] EXP Share All – Make the EXP Share work like modern games, distributing EXP to all party Pokémon.
 - [x] Allow Both Latios and Latias Appear.
 - [x] Type Effectiveness - Show Type Effectiveness In Battle Using Pre Existing Function and Disable in Option Menu.
-- [ ] HMs oustide use - HM can now be used as a field item.
+- [x] HMs oustide use - HM can now be used as a field item.
 
 Evolution Table: [Evolutions](Evolution.md)
 

@@ -19,13 +19,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
 
-      - name: Checkout syms
-        if: ${{ github.event_name == 'push' }}
-        uses: actions/checkout@v5
-        with:
-          path: symbols
-          ref: symbols
-
       - name: Checkout agbcc
         uses: actions/checkout@v5
         with:
@@ -73,6 +66,6 @@ jobs:
         if: ${{ github.event_name == 'push' }}
         uses: EndBug/add-and-commit@v7
         with:
-          branch: qol-features
+          branch: modern
           add: ".github/Evolution.md"
           message: ${{ env.SYMBOLS_COMMIT_MSG }}
