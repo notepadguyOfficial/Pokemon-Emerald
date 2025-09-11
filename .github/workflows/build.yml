@@ -13,7 +13,7 @@ jobs:
       GAME_VERSION: EMERALD
       GAME_REVISION: 0
       GAME_LANGUAGE: ENGLISH
-      MODERN: 1
+      MODERN: 0
       COMPARE: 0
     steps:
       - name: Checkout
@@ -44,8 +44,13 @@ jobs:
           ./build.sh
           ./install.sh ../
         working-directory: agbcc
-      
+
       - name: Build Pokemon Emerald
+        run: make -j${nproc} all
+      
+      - name: Build Pokemon Emerald Modern
+        env:
+          MODERN: 1
         run: make -j${nproc} all
       
       - name: Rename Rom File
