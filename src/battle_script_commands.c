@@ -3527,7 +3527,7 @@ static void Cmd_getexp(void)
                     gExpShareCheck = TRUE;
                     gBattleStruct->expGetterMonId = 0;
                     PREPARE_WORD_NUMBER_BUFFER(gBattleTextBuff3, 5, gExpShareExp);
-                    PrepareStringBattle(STRINGID_PKMNGAINEDEXPALL, gBattleStruct->expGetterBattlerId);
+                    PrepareStringBattle(STRINGID_TEAMGAINEDEXP, gBattleStruct->expGetterBattlerId);
                     gBattleScripting.getexpState = 2; // loop again
                 }
                 else
