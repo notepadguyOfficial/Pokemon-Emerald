@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GAME_VERSION: EMERALD
-      GAME_REVISION: 0
+      GAME_REVISION: 1
       GAME_LANGUAGE: ENGLISH
-      MODERN: 0
-      COMPARE: 1
+      MODERN: 1
+      COMPARE: 0
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -45,17 +45,8 @@ jobs:
           ./install.sh ../
         working-directory: agbcc
 
-      - name: Compare
-        run: make -j${nproc} all syms
-
       - name: Modern
-        env:
-          MODERN: 1
-          COMPARE: 0
         run: make -j${nproc} all
-
-      - name: Rename File pokeemerald.gba
-        run: mv pokeemerald.gba "Pokemon Emerald.gba"
 
       - name: Rename File pokeemerald_modern.gba
         run: mv pokeemerald_modern.gba "Pokemon Emerald (Modern).gba"
@@ -65,7 +56,6 @@ jobs:
         with:
           name: Latest-Build
           path: |
-            Pokemon Emerald.gba
             Pokemon Emerald (Modern).gba
           retention-days: 90
           if-no-files-found: error
