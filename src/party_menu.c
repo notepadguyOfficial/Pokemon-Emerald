@@ -4428,7 +4428,11 @@ void ItemUseCB_Medicine(u8 taskId, TaskFunc task)
     u16 item = gSpecialVar_ItemId;
     bool8 canHeal, cannotUse;
 
-    if (NotUsingHPEVItemOnShedinja(mon, item) == FALSE)
+    if (IsMultiBattle() == TRUE && (gPartyMenu.slotId == 1 || gPartyMenu.slotId == 4 || gPartyMenu.slotId == 5))
+    {
+        cannotUse = TRUE;
+    }
+    else if (NotUsingHPEVItemOnShedinja(mon, item) == FALSE)
     {
         cannotUse = TRUE;
     }
@@ -4682,7 +4686,15 @@ static void TryUsePPItem(u8 taskId)
     struct PartyMenu *ptr = &gPartyMenu;
     struct Pokemon *mon;
 
-    if (ExecuteTableBasedItemEffect_(ptr->slotId, item, *moveSlot))
+    if (IsMultiBattle() == TRUE && (ptr->slotId == 1 || ptr->slotId == 4 || ptr->slotId == 5))
+    {
+        gPartyMenuUseExitCallback = FALSE;
+        PlaySE(SE_SELECT);
+        DisplayPartyMenuMessage(gText_WontHaveEffect, TRUE);
+        ScheduleBgCopyTilemapToVram(2);
+        gTasks[taskId].func = Task_ClosePartyMenuAfterText;
+    }
+    else if (ExecuteTableBasedItemEffect_(ptr->slotId, item, *moveSlot))
     {
         gPartyMenuUseExitCallback = FALSE;
         PlaySE(SE_SELECT);
