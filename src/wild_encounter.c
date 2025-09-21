@@ -267,39 +267,47 @@ static u8 ChooseWildMonIndex_Fishing(u8 rod)
 
 static u8 ChooseWildMonLevel(const struct WildPokemon *wildPokemon)
 {
+    u8 lead = GetMonData(&gPlayerParty[0], MON_DATA_LEVEL);
+    u8 scale = GetScaledLevel(lead);
+
     u8 min;
     u8 max;
     u8 range;
     u8 rand;
 
-    // Make sure minimum level is less than maximum level
-    if (wildPokemon->maxLevel >= wildPokemon->minLevel)
+    if (VarGet(VAR_DIFFICULTY) == DIFFICULTY_NORMAL)
     {
-        min = wildPokemon->minLevel;
-        max = wildPokemon->maxLevel;
+        // Make sure minimum level is less than maximum level
+        if (wildPokemon->maxLevel >= wildPokemon->minLevel)
+        {
+            min = wildPokemon->minLevel;
+            max = wildPokemon->maxLevel;
+        }
+        else
+        {
+            min = wildPokemon->maxLevel;
+            max = wildPokemon->minLevel;
+        }
+        range = max - min + 1;
+        rand = Random() % range;
+
+        // check ability for max level mon
+        if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
+        {
+            u8 ability = GetMonAbility(&gPlayerParty[0]);
+            if (ability == ABILITY_HUSTLE || ability == ABILITY_VITAL_SPIRIT || ability == ABILITY_PRESSURE)
+            {
+                if (Random() % 2 == 0)
+                    return max;
+
+                if (rand != 0)
+                    rand--;
+            }
+        }
+        return min + rand;
     }
     else
-    {
-        min = wildPokemon->maxLevel;
-        max = wildPokemon->minLevel;
-    }
-    range = max - min + 1;
-    rand = Random() % range;
-
-    // check ability for max level mon
-    if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_IS_EGG))
-    {
-        u8 ability = GetMonAbility(&gPlayerParty[0]);
-        if (ability == ABILITY_HUSTLE || ability == ABILITY_VITAL_SPIRIT || ability == ABILITY_PRESSURE)
-        {
-            if (Random() % 2 == 0)
-                return max;
-
-            if (rand != 0)
-                rand--;
-        }
-    }
-    return min + rand;
+        return scale;
 }
 
 static u16 GetCurrentMapWildMonHeaderId(void)
@@ -406,12 +414,23 @@ static void CreateWildMon(u16 species, u8 level)
             gender = MON_MALE;
         else
             gender = MON_FEMALE;
-
-        CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, level, USE_RANDOM_IVS, gender, PickWildMonNature(), 0);
+        if (VarGet(VAR_DIFFICULTY) == DIFFICULTY_EASY)
+        {
+            u8 fixedIV = MAX_PER_STAT_IVS;
+            CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, level, fixedIV, gender, PickWildMonNature(), 0);
+        }
+        else
+            CreateMonWithGenderNatureLetter(&gEnemyParty[0], species, level, USE_RANDOM_IVS, gender, PickWildMonNature(), 0);
         return;
     }
 
-    CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, PickWildMonNature());
+    if (VarGet(VAR_DIFFICULTY) == DIFFICULTY_EASY)
+    {
+        u8 fixedIV = MAX_PER_STAT_IVS;
+        CreateMonWithNature(&gEnemyParty[0], species, level, fixedIV, PickWildMonNature());
+    }
+    else
+        CreateMonWithNature(&gEnemyParty[0], species, level, USE_RANDOM_IVS, PickWildMonNature());
 }
 #ifdef BUGFIX
 #define TRY_GET_ABILITY_INFLUENCED_WILD_MON_INDEX(wildPokemon, type, ability, ptr, count) TryGetAbilityInfluencedWildMonIndex(wildPokemon, type, ability, ptr, count)

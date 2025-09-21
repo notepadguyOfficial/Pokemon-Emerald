@@ -755,7 +755,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
             const struct TrainerMonNoItemDefaultMoves *party;
             party = gTrainers[opponentId].party.NoItemDefaultMoves;
             for (i = 0; i < count; i++)
-                sum += party[i].lvl;
+                sum += GetScaledLevel(party[i].lvl);
         }
         break;
     case F_TRAINER_PARTY_CUSTOM_MOVESET:
@@ -763,7 +763,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
             const struct TrainerMonNoItemCustomMoves *party;
             party = gTrainers[opponentId].party.NoItemCustomMoves;
             for (i = 0; i < count; i++)
-                sum += party[i].lvl;
+                sum += GetScaledLevel(party[i].lvl);
         }
         break;
     case F_TRAINER_PARTY_HELD_ITEM:
@@ -771,7 +771,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
             const struct TrainerMonItemDefaultMoves *party;
             party = gTrainers[opponentId].party.ItemDefaultMoves;
             for (i = 0; i < count; i++)
-                sum += party[i].lvl;
+                sum += GetScaledLevel(party[i].lvl);
         }
         break;
     case F_TRAINER_PARTY_CUSTOM_MOVESET | F_TRAINER_PARTY_HELD_ITEM:
@@ -779,7 +779,7 @@ static u8 GetSumOfEnemyPartyLevel(u16 opponentId, u8 numMons)
             const struct TrainerMonItemCustomMoves *party;
             party = gTrainers[opponentId].party.ItemCustomMoves;
             for (i = 0; i < count; i++)
-                sum += party[i].lvl;
+                sum += GetScaledLevel(party[i].lvl);
         }
         break;
     }
@@ -1399,6 +1399,43 @@ void ShowTrainerIntroSpeech(void)
     {
         ShowFieldMessage(GetIntroSpeechOfApproachingTrainer());
     }
+}
+
+u8 GetScaledLevel(u8 level)
+{
+    u8 badge = 0;
+    u8 scale = 0;
+    u32 i;
+    
+    for (i = FLAG_BADGE01_GET; i < FLAG_BADGE01_GET + NUM_BADGES; i++)
+    {
+        if (FlagGet(i))
+            badge++;
+    }
+
+    if (FlagGet(FLAG_IS_CHAMPION))
+        scale = 5;
+    else if (badge >= 6)
+        scale = 4;
+    else if (badge >= 4)
+        scale = 3;
+    else if (badge >= 2)
+        scale = 2;
+    else
+        scale = 1;
+
+    if (VarGet(VAR_DIFFICULTY) == DIFFICULTY_EASY)
+        level -= scale;
+    else if (VarGet(VAR_DIFFICULTY) == DIFFICULTY_HARD)
+        level += scale;
+    else if (VarGet(VAR_DIFFICULTY) == DIFFICULTY_INSANE)
+        level += scale * 2;
+
+    if (level > 100)
+        level = 100;
+    if (level < 1)
+        level = 1;
+    return level;
 }
 
 const u8 *BattleSetup_GetScriptAddrAfterBattle(void)
