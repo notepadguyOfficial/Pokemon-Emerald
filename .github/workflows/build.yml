@@ -59,21 +59,3 @@ jobs:
             Pokemon Emerald (Modern).gba
           retention-days: 90
           if-no-files-found: error
-
-      - name: Move symfiles
-        if: ${{ github.event_name == 'push' }}
-        run: |
-          cp -v *.sym symbols/
-          echo "SYMBOLS_COMMIT_MSG=$( git log --format=%s ${GITHUB_SHA} )" >> $GITHUB_ENV
-
-      - name: Update symfiles
-        if: ${{ github.event_name == 'push' }}
-        uses: EndBug/add-and-commit@v9.1.4
-        env:
-          SYMBOLS_COMMIT_MSG: ${{ env.SYMBOLS_COMMIT_MSG }}
-        with:
-          cwd: "./symbols"
-          add: "*.sym"
-          message: ${{ env.SYMBOLS_COMMIT_MSG }}
-          push: true
-          github_token: ${{ secrets.PAT_PUSH }}
