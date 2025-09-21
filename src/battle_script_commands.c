@@ -10015,6 +10015,11 @@ static void Cmd_handleballthrow(void)
             if (gLastUsedItem == ITEM_MASTER_BALL)
                 shakes = BALL_3_SHAKES_SUCCESS; // why calculate the shakes before that check?
 
+            if (VarGet(VAR_DIFFICULTY) == DIFFICULTY_EASY)
+            {
+                shakes = BALL_3_SHAKES_SUCCESS;
+            }
+
             BtlController_EmitBallThrowAnim(B_COMM_TO_CONTROLLER, shakes);
             MarkBattlerForControllerExec(gActiveBattler);
 
