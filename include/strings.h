@@ -3030,6 +3030,10 @@ extern const u8 gText_PkmnForSwap[];
 extern const u8 gText_SamePkmnInPartyAlready[];
 extern const u8 gText_Cancel3[];
 
+extern const u8 sTextNatureDown[];
+extern const u8 sTextNatureUp[];
+extern const u8 sTextNatureNeutral[];
+
 // Naming Screen
 extern const u8 gText_MoveOkBack[];
 extern const u8 gText_YourName[];
