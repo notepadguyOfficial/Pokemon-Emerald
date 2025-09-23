@@ -1826,6 +1826,12 @@ static bool8 Fishing_ShowDots(struct Task *task)
     task->tFrameCounter++;
     if (JOY_NEW(A_BUTTON))
     {
+        if(VarGet(VAR_DIFFICULTY) == DIFFICULTY_EASY)
+        {
+            task->tStep = FISHING_GOT_BITE;
+            return FALSE;
+        }
+
         task->tStep = FISHING_NO_BITE;
         if (task->tRoundsPlayed != 0)
             task->tStep = FISHING_GOT_AWAY;
@@ -1838,7 +1844,10 @@ static bool8 Fishing_ShowDots(struct Task *task)
             task->tFrameCounter = 0;
             if (task->tNumDots >= task->tDotsRequired)
             {
-                task->tStep++;
+                if(VarGet(VAR_DIFFICULTY) == DIFFICULTY_EASY)
+                    task->tStep = FISHING_GOT_BITE;
+                else
+                    task->tStep++;  
                 if (task->tRoundsPlayed != 0)
                     task->tStep++;
                 task->tRoundsPlayed++;
@@ -1908,13 +1917,22 @@ static bool8 Fishing_WaitForA(struct Task *task)
         [GOOD_ROD]  = 33,
         [SUPER_ROD] = 30
     };
+    
+    if(VarGet(VAR_DIFFICULTY) != DIFFICULTY_EASY)
+    {
+        AlignFishingAnimationFrames();
+        task->tFrameCounter++;
+        if (task->tFrameCounter >= reelTimeouts[task->tFishingRod])
+            task->tStep = FISHING_GOT_AWAY;
+        else if (JOY_NEW(A_BUTTON))
+            task->tStep++;
+    }
+    else
+    {
+        if (JOY_NEW(A_BUTTON))
+            task->tStep++;
+    }
 
-    AlignFishingAnimationFrames();
-    task->tFrameCounter++;
-    if (task->tFrameCounter >= reelTimeouts[task->tFishingRod])
-        task->tStep = FISHING_GOT_AWAY;
-    else if (JOY_NEW(A_BUTTON))
-        task->tStep++;
     return FALSE;
 }
 
@@ -1930,17 +1948,21 @@ static bool8 Fishing_CheckMoreDots(struct Task *task)
 
     AlignFishingAnimationFrames();
     task->tStep++;
-    if (task->tRoundsPlayed < task->tMinRoundsRequired)
-    {
-        task->tStep = FISHING_START_ROUND;
-    }
-    else if (task->tRoundsPlayed < 2)
-    {
-        // probability of having to play another round
-        s16 probability = Random() % 100;
 
-        if (moreDotsChance[task->tFishingRod][task->tRoundsPlayed] > probability)
+    if(VarGet(VAR_DIFFICULTY) != DIFFICULTY_EASY)
+    {
+        if (task->tRoundsPlayed < task->tMinRoundsRequired)
+        {
             task->tStep = FISHING_START_ROUND;
+        }
+        else if (task->tRoundsPlayed < 2)
+        {
+            // probability of having to play another round
+            s16 probability = Random() % 100;
+
+            if (moreDotsChance[task->tFishingRod][task->tRoundsPlayed] > probability)
+                task->tStep = FISHING_START_ROUND;
+        }
     }
     return FALSE;
 }
